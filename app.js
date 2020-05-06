@@ -27,7 +27,7 @@ app.use(expressLayouts)           // Definimos que vamos utilizar o express-ejs-
 app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir parsear o corpo das requisições
 
 app.get('/', (req, res) => {
-  res.render('pages/home', {layout: "layout"})
+  res.render("login", {layout: "login"})
 })
 
 app.post('/authnew', function(request, response) {
