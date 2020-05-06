@@ -36,7 +36,7 @@ app.post('/authnew', function(request, response) {
 	let email = request.body.email;
 	let senha = request.body.senha;
 
-	let newUser = "INSERT INTO usuario (nome, sobrenome, email, senha) values ('"+nome+"', '"+sobrenome+"', '"+email+"', '"+senha+"')";
+	let newUser = "INSERT INTO usuario (id_conta, nome, sobrenome, email, senha) values (1, '"+nome+"', '"+sobrenome+"', '"+email+"', '"+senha+"')";
 	db.query(newUser, (error, results) => {
 		if (error){
 			response.send('Erro: '+error +' '+ nome +' '+ sobrenome +' '+ email);
