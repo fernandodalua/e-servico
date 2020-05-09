@@ -46,6 +46,41 @@ app.post('/authnew', function(request, response) {
 	});
 });
 
+app.post('/auth', function(request, response) {
+	let username = request.body.username;
+	let password = request.body.password;
+
+	let userQuery = "SELECT id_usuario as id_user, nome FROM usuario WHERE email = '"+ username +"' AND senha = '"+ password +"'";
+	//let feedQuery = "SELECT p.id as id_publication, c.id as id_account, c.fullname, date_format(p.date_post, '%d/%m/%Y %H:%m:%s') as date_post, p.post, f.photo, p.title, p.portion, p.preparation_time FROM publications p inner join accounts c on p.id_account = c.id left join photo_publications f on p.id = f.id_publication order by p.date_post desc";        
+
+	/*db.query(feedQuery, (error, results) => {            
+		feed = results;
+	});*/
+
+	if (username && password) {
+		db.query(userQuery, (error, results) => {
+			if (results.length > 0) {
+				request.session.loggedin = true;
+				request.session.username = username;
+				request.session.id_user = results[0].id_user;
+				account = results;
+				/*let feedNews = "SELECT p.id as id_publication, c.id as id_account, c.fullname, date_format(p.date_post, '%d/%m/%Y %H:%m:%s') as date_post, p.post, f.photo, p.title, p.portion, p.preparation_time FROM publications p inner join accounts c on p.id_account = c.id left join photo_publications f on p.id = f.id_publication where c.id != " + results[0].id_user + " order by p.id desc limit 1";
+				console.log(feedNews);
+				db.query(feedNews, (error, result) => {                        
+					news = result;
+					response.render('home', { account: results, feed: feed, news: result });
+				});*/
+				
+			} else {
+				//response.send('Senha incorreta');
+				response.render('index');
+			}
+		});
+	} else {
+		response.render('index');
+	}
+});
+
 app.get('/buttons', (req, res) => {
   res.render('pages/buttons', {layout: "layout"})
 })
