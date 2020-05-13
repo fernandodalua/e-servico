@@ -70,7 +70,7 @@ app.post('/auth', function(request, response) {
 					news = result;
 					response.render('home', { account: results, feed: feed, news: result });
 				});*/
-				response.render('pages/home', {layout: "layout"});
+				response.render('pages/home', {account: results, layout: "layout"});
 			} else {
 				//response.send('Senha incorreta');
 				response.render('index');
