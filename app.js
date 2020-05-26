@@ -3,29 +3,29 @@ const faker = require('faker')
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const session = require('express-session')
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator')
 const app = express()
 const port = process.env.PORT || 5000
-const mysql = require('mysql');
-const multer = require('multer');
-material = [];
-cliente = [];
+const mysql = require('mysql')
+const multer = require('multer')
+material = []
+cliente = []
 
 const db = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
 	password : 'dalua123',
 	database : 'eservico'
-});
+})
 
 app.use(session({
     secret: '1d2a3l4u5a',
     resave: true,
 	saveUninitialized: true
-}));
+}))
 
 app.set('view engine', 'ejs')     // Setamos que nossa engine será o ejs
-app.set('layout', 'login', 'register', 'forgot-password');
+app.set('layout', 'login', 'register', 'forgot-password')
 app.use(expressLayouts)           // Definimos que vamos utilizar o express-ejs-layouts na nossa aplicação
 app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir parsear o corpo das requisições
 
@@ -34,59 +34,59 @@ app.get('/', (req, res) => {
 })
 
 app.post('/authnew', function(request, response) {
-	let nome = request.body.nome;
-	let sobrenome = request.body.sobrenome;		
-	let email = request.body.email;
-	let senha = request.body.senha;
+	let nome = request.body.nome
+	let sobrenome = request.body.sobrenome
+	let email = request.body.email
+	let senha = request.body.senha
 
-	let newUser = "INSERT INTO usuario (id_conta, nome, sobrenome, email, senha) values (1, '"+nome+"', '"+sobrenome+"', '"+email+"', '"+senha+"')";
+	let newUser = "INSERT INTO usuario (id_conta, nome, sobrenome, email, senha) values (1, '"+nome+"', '"+sobrenome+"', '"+email+"', '"+senha+"')"
 	db.query(newUser, (error, results) => {
 		if (error){
-			response.send('Erro: '+error +' '+ nome +' '+ sobrenome +' '+ email);
+			response.send('Erro: '+error +' '+ nome +' '+ sobrenome +' '+ email)
 		}else{
-			response.render('login');
+			response.render('login')
 		}			
-	});
-});
+	})
+})
 
 app.post('/auth', function(request, response) {
-	let username = request.body.username;
-	let password = request.body.password;
+	let username = request.body.username
+	let password = request.body.password
 
-	let userQuery = "SELECT id_usuario as id_user, id_conta, nome FROM usuario WHERE email = '"+ username +"' AND senha = '"+ password +"'";
+	let userQuery = "SELECT id_usuario as id_user, id_conta, nome FROM usuario WHERE email = '"+ username +"' AND senha = '"+ password +"'"
 
 	if (username && password) {
 		db.query(userQuery, (error, results) => {
 			if (results.length > 0) {
-				request.session.loggedin = true;
-				request.session.username = username;
-				request.session.id_user = results[0].id_user;
-				request.session.id_conta = results[0].id_conta;
-				account = results;
+				request.session.loggedin = true
+				request.session.username = username
+				request.session.id_user = results[0].id_user
+				request.session.id_conta = results[0].id_conta
+				account = results
 
-				response.render('pages/home', {account: results, layout: "layout"});
+				response.render('pages/home', {account: results, layout: "layout"})
 			} else {
-				response.render('index');
+				response.render('index')
 			}
-		});
+		})
 	} else {
-		response.render('index');
+		response.render('index')
 	}
-});
+})
 
 app.post('/material-post', [		
 		check('codigo').isNumeric()
 	], function(request, response){
 	const errors = validationResult(request)
 	if (!errors.isEmpty()) {
-		return response.render('pages/materiais', {material: material, layout: "layout"});
+		return response.render('pages/materiais', {material: material, layout: "layout"})
 	}
-	let id_conta = request.session.id_conta;
-	let codigo = request.body.codigo;
-	let nome = request.body.nome;
-	let custo = request.body.custo.replace(",", ".");
-	let lucro = request.body.lucro.replace(",", ".");
-	let venda = request.body.venda.replace(",", ".");
+	let id_conta = request.session.id_conta
+	let codigo = request.body.codigo
+	let nome = request.body.nome
+	let custo = request.body.custo.replace(",", ".")
+	let lucro = request.body.lucro.replace(",", ".")
+	let venda = request.body.venda.replace(",", ".")
 
 	if(!custo){
 		custo = 0
@@ -98,40 +98,82 @@ app.post('/material-post', [
 		venda = 0
 	}
 	
-	let query = "insert into material (id_conta, codigo, nome, custo, lucro, venda) values ('"+id_conta+"', '"+codigo+"', '"+nome+"', '"+custo+"', '"+lucro+"', '"+venda+"')";
+	let query = "insert into material (id_conta, codigo, nome, custo, lucro, venda) values ('"+id_conta+"', '"+codigo+"', '"+nome+"', '"+custo+"', '"+lucro+"', '"+venda+"')"
 	db.query(query, (error,results) => {
 		if (error) {
-			response.send('Erro: ' + error + ' ' + query + ' ' + codigo + ' ' + nome);
+			response.send('Erro: ' + error + ' ' + query + ' ' + codigo + ' ' + nome)
 		} else {
 
-			query = "select id_conta, codigo, nome, format(venda, 2, 'de_DE') as venda from material where id_conta = '"+id_conta+"'";
+			query = "select id_conta, codigo, nome, format(venda, 2, 'de_DE') as venda from material where id_conta = '"+id_conta+"'"
 			db.query(query, (error, results) => {
 				if(error){
-					response.send('Erro: ' + error);
+					response.send('Erro: ' + error)
 				}else{
 					material = results
-					response.render('pages/materiais', {material: material, layout: "layout"});
+					response.render('pages/materiais', {material: material, layout: "layout"})
 				}
-			});
+			})
 		}
-	});	
+	})
 })
 
 app.get('/materiais', (request, response) => {
-	let id_conta = request.session.id_conta;
-	query = "select id_conta, codigo, nome, format(venda, 2, 'de_DE') as venda from material where id_conta = '"+id_conta+"'";
+	let id_conta = request.session.id_conta
+	query = "select id_conta, codigo, nome, format(venda, 2, 'de_DE') as venda from material where id_conta = '"+id_conta+"'"
 	db.query(query, (error, results) => {
 		if(error){
-			response.send('Erro: ' + error);
+			response.send('Erro: ' + error)
 		}else{
 			material = results
-			response.render('pages/materiais', {material: material, layout: "layout"});
+			response.render('pages/materiais', {material: material, layout: "layout"})
 		}
-	});
+	})
 })
 
 app.get('/clientes', (req, res) => {
-	res.render('pages/clientes', {cliente: cliente, layout: "layout"})
+	query = "select nome, cpf, telefone from cliente where id_conta = '"+id_conta+"'"
+	db.query(query, (error, results) => {
+		if(error){
+			response.send('Erro: ' + error)
+		}else{
+			cliente = results
+			response.render('pages/clientes', {cliente: cliente, layout: "layout"})
+		}
+	})
+})
+
+app.post('/cliente-post', [], function(request, response){
+	const errors = validationResult(request)
+	if (!errors.isEmpty()) {
+		return response.render('pages/clientes', {cliente: cliente, layout: "layout"})
+	}
+	let id_conta = request.session.id_conta
+	let nome = request.session.nome
+	let endereco = request.session.endereco
+	let nascimento = request.session.nascimento
+	let sexo = request.session.sexo
+	let rg = request.session.rg
+	let cpf = request.session.cpf
+	let telefone = request.session.telefone
+	let email = request.session.email
+
+	let query = "insert into cliente (id_conta, nome, endereco, nascimento, sexo, rg, cpf, telefone, email) values ('"+id_conta+"', '"+nome+"', '"+endereco+"', '"+nascimento+"', '"+sexo+"', '"+rg+"', '"+cpf+"', '"+telefone+"', '"+email+"')"
+	db.query(query, (error,results) => {
+		if (error) {
+			response.send('Erro: ' + error + ' ' + query)
+		} else {
+
+			query = "select nome, cpf, telefone from cliente where id_conta = '"+id_conta+"'"
+			db.query(query, (error, results) => {
+				if(error){
+					response.send('Erro: ' + error)
+				}else{
+					cliente = results
+					response.render('pages/clientes', {cliente: cliente, layout: "layout"})
+				}
+			})
+		}
+	})
 })
 
 app.get('/cards', (req, res) => {
