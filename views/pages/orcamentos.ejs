@@ -1,12 +1,14 @@
 <%- contentFor('body') %> 
 <div class="container-fluid">
     <form action="orcamento-post" method="POST">
-        <select name="cliente" class="form-control">
-            <option selected="" required> Selecione um cliente</option>
-            <% for(var i = 0; i < cliente.length; i++){ %>
-            <option value="<%= cliente[i].id_cliente %> "><%= cliente[i].nome %></option>
-            <% } %>
-        </select>
+        <div class="form-row">
+            <select name="cliente" class="form-control">
+                <option selected="" required> Selecione um cliente</option>
+                <% for(var i = 0; i < cliente.length; i++){ %>
+                <option value="<%= cliente[i].id_cliente %> "><%= cliente[i].nome %></option>
+                <% } %>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Iniciar orçamento</button>
     </form>
 </div>
