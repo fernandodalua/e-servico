@@ -8,7 +8,7 @@ const app = express()
 const port = process.env.PORT || 5000
 const mysql = require('mysql');
 const multer = require('multer');
-results = [];
+material = [];
 
 const db = mysql.createConnection({
 	host     : 'localhost',
@@ -53,11 +53,6 @@ app.post('/auth', function(request, response) {
 	let password = request.body.password;
 
 	let userQuery = "SELECT id_usuario as id_user, id_conta, nome FROM usuario WHERE email = '"+ username +"' AND senha = '"+ password +"'";
-	//let feedQuery = "SELECT p.id as id_publication, c.id as id_account, c.fullname, date_format(p.date_post, '%d/%m/%Y %H:%m:%s') as date_post, p.post, f.photo, p.title, p.portion, p.preparation_time FROM publications p inner join accounts c on p.id_account = c.id left join photo_publications f on p.id = f.id_publication order by p.date_post desc";        
-
-	/*db.query(feedQuery, (error, results) => {            
-		feed = results;
-	});*/
 
 	if (username && password) {
 		db.query(userQuery, (error, results) => {
@@ -67,15 +62,9 @@ app.post('/auth', function(request, response) {
 				request.session.id_user = results[0].id_user;
 				request.session.id_conta = results[0].id_conta;
 				account = results;
-				/*let feedNews = "SELECT p.id as id_publication, c.id as id_account, c.fullname, date_format(p.date_post, '%d/%m/%Y %H:%m:%s') as date_post, p.post, f.photo, p.title, p.portion, p.preparation_time FROM publications p inner join accounts c on p.id_account = c.id left join photo_publications f on p.id = f.id_publication where c.id != " + results[0].id_user + " order by p.id desc limit 1";
-				console.log(feedNews);
-				db.query(feedNews, (error, result) => {                        
-					news = result;
-					response.render('home', { account: results, feed: feed, news: result });
-				});*/
+
 				response.render('pages/home', {account: results, layout: "layout"});
 			} else {
-				//response.send('Senha incorreta');
 				response.render('index');
 			}
 		});
@@ -89,7 +78,7 @@ app.post('/material-post', [
 	], function(request, response){
 	const errors = validationResult(request)
 	if (!errors.isEmpty()) {
-		return response.render('pages/materiais', {material: results, layout: "layout"});
+		return response.render('pages/materiais', {material: material, layout: "layout"});
 	}
 	let id_conta = request.session.id_conta;
 	let codigo = request.body.codigo;
@@ -119,7 +108,8 @@ app.post('/material-post', [
 				if(error){
 					response.send('Erro: ' + error);
 				}else{
-					response.render('pages/materiais', {material: results, layout: "layout"});
+					material = results
+					response.render('pages/materiais', {material: material, layout: "layout"});
 				}
 			});
 		}
@@ -141,7 +131,8 @@ app.get('/materiais', (request, response) => {
 		if(error){
 			response.send('Erro: ' + error);
 		}else{
-			response.render('pages/materiais', {material: results, layout: "layout"});
+			material = results
+			response.render('pages/materiais', {material: material, layout: "layout"});
 		}
 	});
 })
