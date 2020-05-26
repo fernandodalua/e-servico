@@ -177,7 +177,7 @@ app.post('/cliente-post', [], function(request, response){
 	})
 })
 
-app.get('/orcamentos', (req, res) => {
+app.get('/orcamentos', (request, response) => {
 	let id_conta = request.session.id_conta
 	query = "select id_cliente, nome from cliente where id_conta = '"+id_conta+"'"
 	db.query(query, (error, results) => {
