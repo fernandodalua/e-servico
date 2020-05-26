@@ -89,8 +89,8 @@ app.get('/cards', (req, res) => {
   res.render('pages/blank', {layout: "layout"})
 })
 
-app.get('/utilities-color', (req, res) => {
-  res.render('pages/blank', {layout: "layout"})  
+app.get('/materiais', (req, res) => {
+  res.render('pages/materiais', {layout: "layout"})  
 })
 
 app.get('/utilities-border', (req, res) => {
