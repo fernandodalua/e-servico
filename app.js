@@ -117,7 +117,8 @@ app.get('/cards', (req, res) => {
 })
 
 app.get('/materiais', (request, response) => {
-	query = "select * from material where id_conta = '"+id_conta+"'";
+	let id_conta = request.session.id_conta;
+	query = "select id_conta, codigo, nome, venda from material where id_conta = '"+id_conta+"'";
 	db.query(query, (error, results) => {
 		if(error){
 			response.send('Erro: ' + error);
