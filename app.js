@@ -88,7 +88,7 @@ app.post('/material-post', [
 	], function(request, response){
 	const errors = validationResult(request)
 	if (!errors.isEmpty()) {
-		return res.status(422).json({ errors: errors.array() })
+		return response.status(422).json({ errors: errors.array() })
 	}
 	let id_conta = request.session.id_conta;
 	let codigo = request.body.codigo;
