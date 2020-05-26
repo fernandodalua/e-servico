@@ -8,44 +8,61 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-4">
-        <label for="example-date-input" class="col-2 col-form-label">Date</label>
-        <div class="col-10">
-          <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
-        </div>
+      <div class="form-group col-md-12">
+        <label for="nome">Endereço</label>
+        <input type="text" class="form-control" id="nome" name="endereco" placeholder="endereco">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="example-date-input" class="col-2 col-form-label">Data Nascimento</label>        
+        <input class="form-control" type="date" value="2020-05-26" id="nascimento" name="nascimento">        
+      </div>
+      <div class="form-group col-md-6">
+        <label for="exampleFormControlSelect1">Sexo</label>
+        <select class="form-control" id="sexo" name="sexo">
+          <option>Masculino</option>
+          <option>Feminino</option>
+        </select>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="custo">Preço de custo</label>
-        <input type="text" class="form-control" id="custo" name="custo">
+        <label for="custo">RG</label>
+        <input type="text" class="form-control" id="rg" name="rg">
       </div>
       <div class="form-group col-md-4">
-        <label for="lucro">Lucro %</label>
-        <input type="text" class="form-control" id="lucro" name="lucro">
+        <label for="lucro">CPF</label>
+        <input type="text" class="form-control" id="cpf" name="cpf">
       </div>
       <div class="form-group col-md-4">
-        <label for="venda">Preço de venda</label>
-        <input type="text" class="form-control" id="venda" name="venda">
+        <label for="venda">Telefone</label>
+        <input type="text" class="form-control" id="telefone" name="telefone">
       </div>
-    </div>      
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nome">E-mail</label>
+        <input type="text" class="form-control" id="nome" name="email" placeholder="email">
+      </div>
+    </div>
     <button type="submit" class="btn btn-primary">Cadastrar</button>
   </form>
 </br>
   <table class="table table-striped table-sm">
     <thead>
       <tr>
-        <th scope="col">Código</th>
-        <th scope="col">Produto</th>
-        <th scope="col">Valor(venda)</th>        
+        <th scope="col">Nome</th>
+        <th scope="col">CPF</th>
+        <th scope="col">Telefone</th>        
       </tr>
     </thead>
     <tbody>
-      <% for(var i = 0; i < material.length; i++){ %>
+      <% for(var i = 0; i < cliente.length; i++){ %>
       <tr>        
-        <th scope="row"><%=material[i].codigo%></th>
-        <td><%=material[i].nome%></td>
-        <td><%=material[i].venda%></td>        
+        <th scope="row"><%=cliente[i].nome%></th>
+        <td><%=cliente[i].cpf%></td>
+        <td><%=cliente[i].telefone%></td>        
       </tr>
       <% } %>     
     </tbody>

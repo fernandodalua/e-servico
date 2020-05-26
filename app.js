@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000
 const mysql = require('mysql');
 const multer = require('multer');
 material = [];
+cliente = [];
 
 const db = mysql.createConnection({
 	host     : 'localhost',
@@ -130,7 +131,7 @@ app.get('/materiais', (request, response) => {
 })
 
 app.get('/clientes', (req, res) => {
-	res.render('pages/clientes', {layout: "layout"})
+	res.render('pages/clientes', {cliente: cliente, layout: "layout"})
 })
 
 app.get('/cards', (req, res) => {
