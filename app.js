@@ -116,8 +116,15 @@ app.get('/cards', (req, res) => {
   res.render('pages/blank', {layout: "layout"})
 })
 
-app.get('/materiais', (req, res) => {
-  res.render('pages/materiais', {layout: "layout"})  
+app.get('/materiais', (request, response) => {
+	query = "select * from material where id_conta = '"+id_conta+"'";
+	db.query(query, (error, results) => {
+		if(error){
+			response.send('Erro: ' + error);
+		}else{
+			response.render('pages/materiais', {material: results, layout: "layout"});
+		}
+	});
 })
 
 app.get('/utilities-border', (req, res) => {
