@@ -95,7 +95,15 @@ app.post('/material-post', function(request, response){
 		if (error) {
 			response.send('Erro: ' + error + ' ' + id_conta + ' ' + codigo + ' ' + nome);
 		} else {
-			response.render('pages/materiais', {layout: "layout"});
+
+			query = "select * from material where id_conta = '"+id_conta+"'";
+			db.query(query, (error, results) => {
+				if(error){
+					response.send('Erro: ' + error);
+				}else{
+					response.render('pages/materiais', {material: results, layout: "layout"});
+				}
+			});
 		}
 	});
 })
