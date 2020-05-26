@@ -103,7 +103,7 @@ app.post('/material-post', [
 			response.send('Erro: ' + error + ' ' + query + ' ' + codigo + ' ' + nome);
 		} else {
 
-			query = "select id_conta, codigo, nome, venda from material where id_conta = '"+id_conta+"'";
+			query = "select id_conta, codigo, nome, format(venda, 2, 'de_DE') as venda from material where id_conta = '"+id_conta+"'";
 			db.query(query, (error, results) => {
 				if(error){
 					response.send('Erro: ' + error);
@@ -114,14 +114,6 @@ app.post('/material-post', [
 			});
 		}
 	});	
-})
-
-app.get('/buttons', (req, res) => {
-  res.render('pages/blank', {layout: "layout"})
-})
-
-app.get('/cards', (req, res) => {
-  res.render('pages/blank', {layout: "layout"})
 })
 
 app.get('/materiais', (request, response) => {
@@ -137,6 +129,14 @@ app.get('/materiais', (request, response) => {
 	});
 })
 
+app.get('/buttons', (req, res) => {
+	res.render('pages/blank', {layout: "layout"})
+})
+
+app.get('/cards', (req, res) => {
+	res.render('pages/blank', {layout: "layout"})
+})
+
 app.get('/utilities-border', (req, res) => {
   res.render('pages/blank', {layout: "layout"})  
 })
@@ -148,7 +148,6 @@ app.get('/utilities-animation', (req, res) => {
 app.get('/utilities-other', (req, res) => {
   res.render('pages/blank', {layout: "layout"})  
 })
-
 
 app.get('/charts', (req, res) => {
   res.render('pages/blank', {layout: "layout"})
