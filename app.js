@@ -177,6 +177,19 @@ app.post('/cliente-post', [], function(request, response){
 	})
 })
 
+app.get('/orcamentos', (req, res) => {
+	let id_conta = request.session.id_conta
+	query = "select id_cliente, nome from cliente where id_conta = '"+id_conta+"'"
+	db.query(query, (error, results) => {
+		if(error){
+			response.send('Erro: ' + error)
+		}else{
+			cliente = results
+			response.render('pages/orcamentos', {cliente: cliente, layout: "layout"})
+		}
+	})
+})
+
 app.get('/cards', (req, res) => {
 	res.render('pages/blank', {layout: "layout"})
 })
@@ -191,10 +204,6 @@ app.get('/utilities-animation', (req, res) => {
 
 app.get('/utilities-other', (req, res) => {
   res.render('pages/blank', {layout: "layout"})  
-})
-
-app.get('/charts', (req, res) => {
-  res.render('pages/blank', {layout: "layout"})
 })
 
 app.get('/blank', (req, res) => {
