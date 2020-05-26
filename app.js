@@ -90,22 +90,26 @@ app.post('/material-post', function(request, response){
 	let lucro = request.body.lucro.replace(",", ".");
 	let venda = request.body.venda.replace(",", ".");
 
-	let query = "insert into material (id_conta, codigo, nome, custo, lucro, venda) values ('"+id_conta+"', '"+codigo+"', '"+nome+"', '"+custo+"', '"+lucro+"', '"+venda+"')";
-	db.query(query, (error,results) => {
-		if (error) {
-			response.send('Erro: ' + error + ' ' + id_conta + ' ' + codigo + ' ' + nome);
-		} else {
+	if(!isNaN(codigo)){
+		alert("Digite um numero")
+	}else{
+		let query = "insert into material (id_conta, codigo, nome, custo, lucro, venda) values ('"+id_conta+"', '"+codigo+"', '"+nome+"', '"+custo+"', '"+lucro+"', '"+venda+"')";
+		db.query(query, (error,results) => {
+			if (error) {
+				response.send('Erro: ' + error + ' ' + id_conta + ' ' + codigo + ' ' + nome);
+			} else {
 
-			query = "select id_conta, codigo, nome, venda from material where id_conta = '"+id_conta+"'";
-			db.query(query, (error, results) => {
-				if(error){
-					response.send('Erro: ' + error);
-				}else{
-					response.render('pages/materiais', {material: results, layout: "layout"});
-				}
-			});
-		}
-	});
+				query = "select id_conta, codigo, nome, venda from material where id_conta = '"+id_conta+"'";
+				db.query(query, (error, results) => {
+					if(error){
+						response.send('Erro: ' + error);
+					}else{
+						response.render('pages/materiais', {material: results, layout: "layout"});
+					}
+				});
+			}
+		});
+	}
 })
 
 app.get('/buttons', (req, res) => {
