@@ -82,32 +82,32 @@ app.post('/auth', function(request, response) {
 });
 
 app.get('/buttons', (req, res) => {
-  res.render('pages/buttons', {layout: "layout"})
+  res.render('pages/blank', {layout: "layout"})
 })
 
 app.get('/cards', (req, res) => {
-  res.render('pages/cards', {layout: "layout"})
+  res.render('pages/blank', {layout: "layout"})
 })
 
 app.get('/utilities-color', (req, res) => {
-  res.render('pages/utilities-color', {layout: "layout"})  
+  res.render('pages/blank', {layout: "layout"})  
 })
 
 app.get('/utilities-border', (req, res) => {
-  res.render('pages/utilities-border', {layout: "layout"})  
+  res.render('pages/blank', {layout: "layout"})  
 })
 
 app.get('/utilities-animation', (req, res) => {
-  res.render('pages/utilities-animation', {layout: "layout"})  
+  res.render('pages/blank', {layout: "layout"})  
 })
 
 app.get('/utilities-other', (req, res) => {
-  res.render('pages/utilities-other', {layout: "layout"})  
+  res.render('pages/blank', {layout: "layout"})  
 })
 
 
 app.get('/charts', (req, res) => {
-  res.render('pages/charts', {layout: "layout"})
+  res.render('pages/blank', {layout: "layout"})
 })
 
 app.get('/blank', (req, res) => {
@@ -123,7 +123,7 @@ app.get('/index', (req, res) => {
 })
 
 app.get('/tables', (req, res) => {
-  res.render('pages/tables', {layout: "layout"})
+  res.render('pages/blank', {layout: "layout"})
 })
 
 app.get('/register', (req, res) =>{
@@ -135,7 +135,7 @@ app.get('/forgot-password', (req, res) =>{
 })
 
 app.get('/404', (req, res) => {
-  res.render('pages/404', {layout: "layout"})
+  res.render('pages/blank', {layout: "layout"})
 })
 
 app.use(express.static(__dirname + '/public'))
