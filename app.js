@@ -131,6 +131,7 @@ app.get('/materiais', (request, response) => {
 })
 
 app.get('/clientes', (req, res) => {
+	let id_conta = request.session.id_conta
 	query = "select nome, cpf, telefone from cliente where id_conta = '"+id_conta+"'"
 	db.query(query, (error, results) => {
 		if(error){
