@@ -88,7 +88,7 @@ app.post('/material-post', [
 	], function(request, response){
 	const errors = validationResult(request)
 	if (!errors.isEmpty()) {
-		return response.status(422).json({ errors: errors.array() })
+		return response.render('pages/materiais', {material: results, layout: "layout"})
 	}
 	let id_conta = request.session.id_conta;
 	let codigo = request.body.codigo;
@@ -99,6 +99,12 @@ app.post('/material-post', [
 
 	if(!custo){
 		custo = 0
+	}
+	if(!lucro){
+		lucro = 0
+	}
+	if(!venda){
+		venda = 0
 	}
 	
 	let query = "insert into material (id_conta, codigo, nome, custo, lucro, venda) values ('"+id_conta+"', '"+codigo+"', '"+nome+"', '"+custo+"', '"+lucro+"', '"+venda+"')";
