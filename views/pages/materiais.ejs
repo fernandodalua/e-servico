@@ -1,14 +1,14 @@
 <%- contentFor('body') %> 
 <div class="container-fluid">
-  <form>
+  <form action="material-post" method="POST">
     <div class="form-row">
       <div class="form-group col-md-3">
         <label for="codigo">Código</label>
-        <input type="text" class="form-control" id="codigo" placeholder="Código">
+        <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Código">
       </div>
       <div class="form-group col-md-9">
         <label for="nome">Nome</label>
-        <input type="text" class="form-control" id="nome" placeholder="Nome">
+        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
       </div>
     </div>
     <!--<div class="form-group">
@@ -22,7 +22,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="custo">Preço de custo</label>
-        <input type="text" class="form-control" id="custo">
+        <input type="text" class="form-control" id="custo" name="custo">
       </div>
       <!--<div class="form-group col-md-4">
         <label for="inputState">State</label>
@@ -33,14 +33,11 @@
       </div>-->
       <div class="form-group col-md-4">
         <label for="lucro">Lucro %</label>
-        <input type="text" class="form-control" id="lucro">
+        <input type="text" class="form-control" id="lucro" name="lucro">
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-4">
         <label for="venda">Preço de venda</label>
-        <input type="text" class="form-control" id="venda">
-      </div>
-      <div class="form-group col-md-2">
-        <input type="text" class="form-control text-left" id="currency" name="currency" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'">
+        <input type="text" class="form-control" id="venda" name="venda">
       </div>
     </div>      
     <!--<div class="form-group">
