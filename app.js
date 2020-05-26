@@ -86,16 +86,16 @@ app.post('/material-post', function(request, response){
 	let id_conta = request.session.id_conta;
 	let codigo = request.body.codigo;
 	let nome = request.body.nome;
-	let custo = request.body.custo;
-	let lucro = request.body.lucro;
-	let venda = request.body.venda;
+	let custo = request.body.custo.replace(",", ".");
+	let lucro = request.body.lucro.replace(",", ".");
+	let venda = request.body.venda.replace(",", ".");
 
 	let query = "insert into material (id_conta, codigo, nome, custo, lucro, venda) values ('"+id_conta+"', '"+codigo+"', '"+nome+"', '"+custo+"', '"+lucro+"', '"+venda+"')";
 	db.query(query, (error,results) => {
 		if (error) {
 			response.send('Erro: ' + error + ' ' + id_conta + ' ' + codigo + ' ' + nome);
 		} else {
-			response.render('pages/materiais');
+			res.render('pages/materiais', {layout: "layout"});
 		}
 	});
 })
