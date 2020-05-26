@@ -3,6 +3,7 @@ const faker = require('faker')
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const session = require('express-session')
+const { check, validationResult } = require('express-validator');
 const app = express()
 const port = process.env.PORT || 5000
 const mysql = require('mysql');
@@ -82,7 +83,13 @@ app.post('/auth', function(request, response) {
 	}
 });
 
-app.post('/material-post', function(request, response){
+app.post('/material-post', [		
+		check('codigo').isNumeric()
+	], function(request, response){
+	const errors = validationResult(request)
+	if (!errors.isEmpty()) {
+		return res.status(422).json({ errors: errors.array() })
+	}
 	let id_conta = request.session.id_conta;
 	let codigo = request.body.codigo;
 	let nome = request.body.nome;
@@ -90,7 +97,7 @@ app.post('/material-post', function(request, response){
 	let lucro = request.body.lucro.replace(",", ".");
 	let venda = request.body.venda.replace(",", ".");
 
-	if(!isNaN(codigo)){
+	if(isNaN(codigo)){
 		alert("Digite um numero")
 	}else{
 		let query = "insert into material (id_conta, codigo, nome, custo, lucro, venda) values ('"+id_conta+"', '"+codigo+"', '"+nome+"', '"+custo+"', '"+lucro+"', '"+venda+"')";
