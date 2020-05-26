@@ -103,7 +103,7 @@ app.post('/material-post', [
 		let query = "insert into material (id_conta, codigo, nome, custo, lucro, venda) values ('"+id_conta+"', '"+codigo+"', '"+nome+"', '"+custo+"', '"+lucro+"', '"+venda+"')";
 		db.query(query, (error,results) => {
 			if (error) {
-				response.send('Erro: ' + error + ' ' + id_conta + ' ' + codigo + ' ' + nome);
+				response.send('Erro: ' + error + ' ' + query + ' ' + codigo + ' ' + nome);
 			} else {
 
 				query = "select id_conta, codigo, nome, venda from material where id_conta = '"+id_conta+"'";
