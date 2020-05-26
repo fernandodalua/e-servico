@@ -8,6 +8,7 @@ const app = express()
 const port = process.env.PORT || 5000
 const mysql = require('mysql');
 const multer = require('multer');
+results = [];
 
 const db = mysql.createConnection({
 	host     : 'localhost',
@@ -88,7 +89,7 @@ app.post('/material-post', [
 	], function(request, response){
 	const errors = validationResult(request)
 	if (!errors.isEmpty()) {
-		return response.render('pages/materiais', {material: results, layout: "layout"})
+		return response.render('pages/materiais', {material: results, layout: "layout"});
 	}
 	let id_conta = request.session.id_conta;
 	let codigo = request.body.codigo;
