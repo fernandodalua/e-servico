@@ -149,14 +149,14 @@ app.post('/cliente-post', [], function(request, response){
 		return response.render('pages/clientes', {cliente: cliente, layout: "layout"})
 	}
 	let id_conta = request.session.id_conta
-	let nome = request.session.nome
-	let endereco = request.session.endereco
-	let nascimento = request.session.nascimento
-	let sexo = request.session.sexo
-	let rg = request.session.rg
-	let cpf = request.session.cpf
-	let telefone = request.session.telefone
-	let email = request.session.email
+	let nome = request.body.nome
+	let endereco = request.body.endereco
+	let nascimento = request.body.nascimento
+	let sexo = request.body.sexo
+	let rg = request.body.rg
+	let cpf = request.body.cpf
+	let telefone = request.body.telefone
+	let email = request.body.email
 
 	let query = "insert into cliente (id_conta, nome, endereco, nascimento, sexo, rg, cpf, telefone, email) values ('"+id_conta+"', '"+nome+"', '"+endereco+"', '"+nascimento+"', '"+sexo+"', '"+rg+"', '"+cpf+"', '"+telefone+"', '"+email+"')"
 	db.query(query, (error,results) => {
