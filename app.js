@@ -95,7 +95,7 @@ app.post('/material-post', function(request, response){
 		if (error) {
 			response.send('Erro: ' + error + ' ' + id_conta + ' ' + codigo + ' ' + nome);
 		} else {
-			res.render('pages/materiais', {layout: "layout"});
+			response.render('pages/materiais', {layout: "layout"});
 		}
 	});
 })
