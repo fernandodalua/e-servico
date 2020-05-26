@@ -1,0 +1,15 @@
+<%- contentFor('body') %> 
+<div class="container-fluid">
+    <form action="orcamento-post" method="POST">
+        <div class="form-row">
+            <select name="cliente" class="form-control">
+                <option selected="" required> Selecione um cliente</option>
+                <% for(var i = 0; i < material.length; i++){ %>
+                <option value="<%= material[i].id_material %> "><%= material[i].nome %></option>
+                <% } %>
+            </select>
+        </div>
+        </br>
+        <button type="submit" class="btn btn-primary">Adicionar item</button>
+    </form>
+</div>

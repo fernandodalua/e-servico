@@ -190,6 +190,23 @@ app.get('/orcamentos', (request, response) => {
 	})
 })
 
+app.post('/orcamento-post', [], function(request, response){
+	const errors = validationResult(request)
+	if (!errors.isEmpty()) {
+		return response.render('pages/orcamentos', {cliente: cliente, layout: "layout"})
+	}
+	let id_conta = request.session.id_conta
+	query = "select id_material, id_conta, codigo, nome, format(venda, 2, 'de_DE') as venda from material where id_conta = '"+id_conta+"'"
+	db.query(query, (error, results) => {
+		if(error){
+			response.send('Erro: ' + error)
+		}else{
+			material = results
+			response.render('pages/orcamento-item', {material: material, layout: "layout"})
+		}
+	})
+})
+
 app.get('/cards', (req, res) => {
 	res.render('pages/blank', {layout: "layout"})
 })
