@@ -50,23 +50,21 @@
     </div>-->
     <button type="submit" class="btn btn-primary">Cadastrar</button>
   </form>
-
+</br>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Código</th>
+        <th scope="col">Produto</th>
+        <th scope="col">Valor(venda)</th>        
       </tr>
     </thead>
     <tbody>
       <% for(var i = 0; i < material.length; i++){ %>
       <tr>        
         <th scope="row"><%=material[i].codigo%></th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td><%=material[i].nome%></td>
+        <td><%=material[i].venda%></td>        
       </tr>
       <% } %>     
     </tbody>
