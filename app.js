@@ -129,8 +129,8 @@ app.get('/materiais', (request, response) => {
 	});
 })
 
-app.get('/buttons', (req, res) => {
-	res.render('pages/blank', {layout: "layout"})
+app.get('/clientes', (req, res) => {
+	res.render('pages/clientes', {layout: "layout"})
 })
 
 app.get('/cards', (req, res) => {
