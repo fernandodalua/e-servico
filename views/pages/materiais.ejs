@@ -32,12 +32,15 @@
         </select>
       </div>-->
       <div class="form-group col-md-4">
-        <label for="lucro">Lucro</label>
+        <label for="lucro">Lucro %</label>
         <input type="text" class="form-control" id="lucro">
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-2">
         <label for="venda">Preço de venda</label>
         <input type="text" class="form-control" id="venda">
+      </div>
+      <div class="form-group col-md-2">
+        <input type="text" class="form-control text-left" id="currency" name="currency" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'">
       </div>
     </div>      
     <!--<div class="form-group">
