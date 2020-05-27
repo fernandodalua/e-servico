@@ -266,7 +266,7 @@ app.post('/orcamento-add',[], function(request, response){
 	})
 })
 
-app.get('/orcamento-print', (request, response)=>{
+app.post('/orcamento-print', (request, response)=>{
 	res.sendFile('/pages/print');
 })
 
