@@ -200,7 +200,9 @@ app.get('/orcamentos', (request, response) => {
 	})
 })
 
-app.post('/orcamento-post', [], function(request, response){
+app.post('/orcamento-post', [
+	check('id_cliente').isEmpty()
+], function(request, response){
 	const errors = validationResult(request)
 	if (!errors.isEmpty()) {
 		return response.render('pages/orcamentos', {cliente: cliente, layout: "layout"})
