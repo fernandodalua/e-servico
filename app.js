@@ -207,7 +207,7 @@ app.post('/orcamento-post', [], function(request, response){
 			query = "select id_orcamento from orcamento where id_conta = '"+id_conta+"' order by desc limit 1"
 			db.query(query, (error, results) => {
 				if(error){
-					response.send('Erro: ' + error)
+					response.send('Erro: ' + error + ' ' + query)
 				}else{
 					request.session.id_orcamento = results[0].id_orcamento
 					query = "select id_material, id_conta, codigo, nome, format(venda, 2, 'de_DE') as venda from material where id_conta = '"+id_conta+"'"
