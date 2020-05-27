@@ -266,8 +266,8 @@ app.post('/orcamento-add',[], function(request, response){
 	})
 })
 
-app.get('/orcamento-print', (request, response)=>{
-	response.render('pages/print');
+app.get('/orcamento-print', (request, response) => {
+	response.render('pages/print', {layout: "orcamento"})
 })
 
 app.get('/cards', (req, res) => {
