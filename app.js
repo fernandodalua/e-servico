@@ -251,7 +251,7 @@ app.post('/orcamento-add',[], function(request, response){
 			response.send('Erro: ' + error + ' ' + query)
 		}else{
 			let id_orcamento = request.session.id_orcamento
-			query = "select qtd, id_material, unitario, total from orcamento_item where id_orcamento = '"+id_orcamento+"'"
+			query = "select o.qtd, m.nome, format(o.unitario, 2, 'de_DE') as unitario, format(o.total, 2, 'de_DE') as total from orcamento_item o, material m where o.id_material = m.id_material and o.id_orcamento = '"+id_orcamento+"'"
 			db.query(query, (error, results) => {
 				if(error){
 					response.send('Erro: ' + error)
