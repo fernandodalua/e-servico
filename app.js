@@ -27,7 +27,7 @@ app.use(session({
 }))
 
 app.set('view engine', 'ejs')     // Setamos que nossa engine será o ejs
-app.set('layout', 'login', 'register', 'forgot-password')
+app.set('layout', 'login', 'register', 'forgot-password', 'print')
 app.use(expressLayouts)           // Definimos que vamos utilizar o express-ejs-layouts na nossa aplicação
 app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir parsear o corpo das requisições
 
@@ -267,7 +267,7 @@ app.post('/orcamento-add',[], function(request, response){
 })
 
 app.get('/orcamento-print', (request, response) => {
-	response.render('pages/print', {layout: "orcamento"})
+	response.render('pages/print', {layout: "print"})
 })
 
 app.get('/cards', (req, res) => {
