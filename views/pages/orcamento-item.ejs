@@ -48,7 +48,11 @@
     <% } %>     
   </tbody>
 </table>
-<form action="orcamento-print" method="POST">
-  <button type="submit" class="btn btn-primary">Imprimir Orçamento</button>
-</form>
+  <button onclick="NewTab()" class="btn btn-primary">Imprimir Orçamento</button>
 </div>
+<script> 
+  function NewTab() { 
+      window.open( 
+        "https://www.geeksforgeeks.org", "_blank"); 
+  } 
+</script> 
