@@ -268,7 +268,7 @@ app.post('/orcamento-add',[], function(request, response){
 
 app.get('/orcamento-print', (request, response) => {
 	//let id_orcamento = request.session.id
-	let query = "select o.data, i.qtd, i.unitario, i.total, m.nome as nome_produto, c.nome as nome_cliente from orcamento o inner join orcamento_item i on o.id_orcamento = i.id_orcamento inner join cliente c on o.id_cliente = c.id_cliente inner join material m on i.id_material = m.id_material where o.id_orcamento = 8" //'"+id_orcamento+"'"
+	let query = "select DATE_FORMAT(o.data, '%d/%m/%Y') as data, i.qtd, i.unitario, i.total, m.nome as nome_produto, c.nome as nome_cliente from orcamento o inner join orcamento_item i on o.id_orcamento = i.id_orcamento inner join cliente c on o.id_cliente = c.id_cliente inner join material m on i.id_material = m.id_material where o.id_orcamento = 8" //'"+id_orcamento+"'"
 	db.query(query, (error, results) => {
 		if(error){
 			response.send('Erro: ' + error)
