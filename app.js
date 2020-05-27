@@ -197,13 +197,60 @@ app.post('/orcamento-post', [], function(request, response){
 		return response.render('pages/orcamentos', {cliente: cliente, layout: "layout"})
 	}
 	let id_conta = request.session.id_conta
-	query = "select id_material, id_conta, codigo, nome, format(venda, 2, 'de_DE') as venda from material where id_conta = '"+id_conta+"'"
+	let id_cliente = request.body.cliente
+
+	query = "insert into orcamento (id_conta, id_cliente) values ('"+id_conta+"','"+id_cliente+"')"
 	db.query(query, (error, results) => {
 		if(error){
 			response.send('Erro: ' + error)
 		}else{
-			material = results
-			response.render('pages/orcamento-item', {itens: itens, material: material, layout: "layout"})
+			query = "select id_orcamento from orcamento where id_conta = '"+id_conta+"' order by desc limit 1"
+			db.query(query, (error, results) => {
+				if(error){
+					response.send('Erro: ' + error)
+				}else{
+					request.session.id_orcamento = results[0].id_orcamento
+					query = "select id_material, id_conta, codigo, nome, format(venda, 2, 'de_DE') as venda from material where id_conta = '"+id_conta+"'"
+					db.query(query, (error, results) => {
+						if(error){
+							response.send('Erro: ' + error)
+						}else{
+							material = results
+							response.render('pages/orcamento-item', {itens: itens, material: material, layout: "layout"})
+						}
+					})
+				}
+			})
+		}
+	})	
+})
+
+app.post('/orcamento-add',[], function(request, response){
+	const errors = validationResult(request)
+	if (!errors.isEmpty()) {
+		return response.render('pages/orcamento-item', {itens: itens, material: material, layout: "layout"})
+	}
+	let id_orcamento = request.session.id_orcamento
+	let qtd = request.body.qtd
+	let item = request.body.item
+	let unit = request.body.unit
+	let total = request.body.total
+
+	let query = "insert into orcamento_item (id_orcamento, qtd, id_material, unitario, total) values ('"+id_orcamento+"','"+qtd+"','"+item+"','"+unit+"','"+total+"')"
+	db.query(query, (error, results) => {
+		if(error){
+			response.send('Erro: ' + error + ' ' + query)
+		}else{
+			let id_orcamento = request.session.id_orcamento
+			query = "select qtd, id_material, unitario, total from orcamento_item where id_orcamento = '"+id_orcamento+"'"
+			db.query(query, (error, results) => {
+				if(error){
+					response.send('Erro: ' + error)
+				}else{
+					itens = results					
+					response.render('pages/orcamento-item', {itens: itens, material: material, layout: "layout"})
+				}
+			})
 		}
 	})
 })
