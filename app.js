@@ -11,6 +11,7 @@ const multer = require('multer')
 material = []
 cliente = []
 itens = []
+orcamento = []
 
 const db = mysql.createConnection({
 	host     : 'localhost',
@@ -186,7 +187,15 @@ app.get('/orcamentos', (request, response) => {
 			response.send('Erro: ' + error)
 		}else{
 			cliente = results
-			response.render('pages/orcamentos', {cliente: cliente, layout: "layout"})
+			query = "select id_cliente, data from orcamento where id_conta = '"+id_conta+"'"
+			db.query(query, (error, results) => {
+				if(error){
+					response.send('Erro: ' + error)
+				}else{
+					orcamento = results
+					response.render('pages/clientes', {orcamento: orcamento, cliente: cliente, layout: "layout"})
+				}
+			})			
 		}
 	})
 })
@@ -199,7 +208,7 @@ app.post('/orcamento-post', [], function(request, response){
 	let id_conta = request.session.id_conta
 	let id_cliente = request.body.cliente
 
-	query = "insert into orcamento (id_conta, id_cliente) values ('"+id_conta+"','"+id_cliente+"')"
+	query = "insert into orcamento (id_conta, id_cliente, data) values ('"+id_conta+"','"+id_cliente+"', DATE_ADD(NOW(), INTERVAL -3 hour))"
 	db.query(query, (error, results) => {
 		if(error){
 			response.send('Erro: ' + error)
