@@ -266,7 +266,7 @@ app.post('/orcamento-add',[], function(request, response){
 	})
 })
 
-app.get('/orcamento-print/:id', (request, response) => {
+app.post('/orcamento-print/:id', (request, response) => {
 	let id_orcamento = request.params.id
 	let query = "select o.data, i.qtd, i.unitario, i.total, m.nome as nome_produto, c.nome as nome_cliente from orcamento o "
 	+"inner join orcamento_item i on o.id_orcamento = i.id_orcamento "
