@@ -193,7 +193,7 @@ app.get('/orcamentos', (request, response) => {
 					response.send('Erro: ' + error)
 				}else{
 					orcamento = results
-					response.render('pages/clientes', {orcamento: orcamento, cliente: cliente, layout: "layout"})
+					response.render('pages/orcamentos', {orcamento: orcamento, cliente: cliente, layout: "layout"})
 				}
 			})			
 		}
