@@ -41,22 +41,34 @@
                 </tr>
                 <tr class="heading ">
                     <td>
+                        Qtd.
+                    </td>
+                    <td>
                         Item
                     </td>
                     <td>
-                        Price
+                        Preço Unit.
+                    </td>
+                    <td>
+                        Preço Total
                     </td>
                 </tr>
-                {{#each items}}
+                <% for(var i = 0; i < orcamento.length; i++){ %>
                 <tr class="item">
                     <td>
-                        {{name}}
+                        <%=orcamento[i].qtd%>
+                    </td>
+                    <td>
+                        $ {{price}}
+                    </td>
+                    <td>
+                        $ {{price}}
                     </td>
                     <td>
                         $ {{price}}
                     </td>
                 </tr>
-                {{/each}}
+                <% } %>    
                 <tr class="total ">
                     <td></td>
                     <td>
