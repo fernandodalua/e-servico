@@ -3,7 +3,7 @@
     <form action="orcamento-post" method="POST">
         <div class="form-row">
             <select name="cliente" class="form-control">
-                <option selected="" required> Selecione um cliente</option>
+                <option value='' selected="" required> Selecione um cliente</option>
                 <% for(var i = 0; i < cliente.length; i++){ %>
                 <option value="<%= cliente[i].id_cliente %> "><%= cliente[i].nome %></option>
                 <% } %>
