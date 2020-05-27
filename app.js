@@ -204,7 +204,7 @@ app.post('/orcamento-post', [], function(request, response){
 		if(error){
 			response.send('Erro: ' + error)
 		}else{
-			query = "select id_orcamento from orcamento where id_conta = '"+id_conta+"' order by desc limit 1"
+			query = "select id_orcamento from orcamento where id_conta = '"+id_conta+"' order by id_orcamento desc limit 1"
 			db.query(query, (error, results) => {
 				if(error){
 					response.send('Erro: ' + error + ' ' + query)
