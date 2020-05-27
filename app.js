@@ -201,7 +201,7 @@ app.get('/orcamentos', (request, response) => {
 })
 
 app.post('/orcamento-post', [
-	check('id_cliente').isEmpty()
+	check('id_cliente').not().isEmpty().isInt()
 ], function(request, response){
 	const errors = validationResult(request)
 	if (!errors.isEmpty()) {
