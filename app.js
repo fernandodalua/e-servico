@@ -275,10 +275,7 @@ app.get('/orcamento-print', (request, response) => {
 		}else{		
 			response.render('pages/print', {orcamento: results, layout: "print"})
 		}
-	})
-
-
-	response.render('pages/print', {layout: "print"})
+	})	
 })
 
 app.get('/cards', (req, res) => {
