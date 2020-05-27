@@ -187,7 +187,7 @@ app.get('/orcamentos', (request, response) => {
 			response.send('Erro: ' + error)
 		}else{
 			cliente = results
-			query = "select id_cliente, DATE_FORMAT(data, '%d %m %Y') from orcamento where id_conta = '"+id_conta+"'"
+			query = "select id_cliente, DATE_FORMAT(data, '%d %m %Y') as data from orcamento where id_conta = '"+id_conta+"'"
 			db.query(query, (error, results) => {
 				if(error){
 					response.send('Erro: ' + error)
