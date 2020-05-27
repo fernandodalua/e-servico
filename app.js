@@ -10,6 +10,7 @@ const mysql = require('mysql')
 const multer = require('multer')
 material = []
 cliente = []
+itens = []
 
 const db = mysql.createConnection({
 	host     : 'localhost',
@@ -202,7 +203,7 @@ app.post('/orcamento-post', [], function(request, response){
 			response.send('Erro: ' + error)
 		}else{
 			material = results
-			response.render('pages/orcamento-item', {material: material, layout: "layout"})
+			response.render('pages/orcamento-item', {itens: itens, material: material, layout: "layout"})
 		}
 	})
 })
