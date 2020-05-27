@@ -242,8 +242,8 @@ app.post('/orcamento-add',[], function(request, response){
 	let id_orcamento = request.session.id_orcamento
 	let qtd = request.body.qtd
 	let item = request.body.item
-	let unit = request.body.unit
-	let total = request.body.total
+	let unit = request.body.unit.replace(",", ".")
+	let total = request.body.total.replace(",", ".")
 
 	let query = "insert into orcamento_item (id_orcamento, qtd, id_material, unitario, total) values ('"+id_orcamento+"','"+qtd+"','"+item+"','"+unit+"','"+total+"')"
 	db.query(query, (error, results) => {
