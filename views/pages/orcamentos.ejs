@@ -44,13 +44,13 @@
       <td><%=orcamento[i].data%></td>
       <td><a onclick="NewTab()"><i class="fas fa-print"></a></i></td>
     </tr>
-    <% } %>     
+    <% } %>
   </tbody>
 </table>
 </div>
 <script> 
   function NewTab() { 
       window.open( 
-        "http://35.232.183.169:5000/orcamento-print/"+<%=orcamento[i].nome%>, "_blank"); 
+        "http://35.232.183.169:5000/orcamento-print/", "_blank"); 
   } 
 </script> 
