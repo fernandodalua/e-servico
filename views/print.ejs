@@ -9,29 +9,29 @@
         <div class="invoice-box">
             <table cellpadding="0" cellspacing="0">
                 <tr class="top">
-                    <td colspan="4">
-                        <table>
-                            <tr>
-                                <td class="title">
-                                    <p>ESTRUTETO - Perfis em aço galvanizado</p>
-                                    <p><h6>Rua Antonio Orlando, nº 470</p>
-                                    <p>estruteto@hotmail.com</h6></p>
-                                    <!--<img src="{#asset Invoice logo.png @encoding=dataURI}" style="width:100%; max-width:300px;" />-->
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    Orçamento nº: {{number}}
-                                    <br> <%=orcamento[0].data%>                                    
-                                </td>
-                            </tr>
-                        </table>
+                    <td colspan="4">                        
+                        <tr>
+                            <td class="title">
+                                <p>ESTRUTETO - Perfis em aço galvanizado</p>
+                                <p><h6>Rua Antonio Orlando, nº 470</p>
+                                <p>estruteto@hotmail.com</h6></p>
+                                <!--<img src="{#asset Invoice logo.png @encoding=dataURI}" style="width:100%; max-width:300px;" />-->
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                Orçamento
+                                <br> <%=orcamento[0].data%>                                    
+                            </td>
+                        </tr>                        
                     </td>
                 </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0">
                 <tr class="information ">
                     <td colspan="4">
                         <table>
@@ -54,6 +54,8 @@
                         </table>
                     </td>
                 </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0">
                 <tr class="heading ">
                     <td>
                         Qtd.
@@ -68,6 +70,8 @@
                         Preço Total
                     </td>
                 </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0">
                 <% for(var i = 0; i < orcamento.length; i++){ %>
                 <tr class="item">
                     <td>
@@ -81,8 +85,11 @@
                     </td>
                     <td>
                         <%=orcamento[i].total%>
+                        <
                     </td>
                 </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0">
                 <% } %>    
                 <tr class="total ">
                     <td></td>
@@ -90,6 +97,26 @@
                     <td></td>
                     <td>
                         Total: ${{total items}}
+                    </td>
+                </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0">
+                <tr class="top">
+                    <td colspan="4">                        
+                        <tr>
+                            <td class="title">
+                                <h6><p><%=orcamento[0].data%></h6></p>
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>                                
+
+                            </td>
+                        </tr>                        
                     </td>
                 </tr>
             </table>

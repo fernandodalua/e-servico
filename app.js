@@ -209,8 +209,9 @@ app.post('/orcamento-post', [
 	}
 	let id_conta = request.session.id_conta
 	let id_cliente = request.body.cliente
+	let observacao = request.body.observacao
 
-	query = "insert into orcamento (id_conta, id_cliente, data) values ('"+id_conta+"','"+id_cliente+"', DATE_ADD(NOW(), INTERVAL -3 hour))"
+	query = "insert into orcamento (id_conta, id_cliente, data, observacao) values ('"+id_conta+"','"+id_cliente+"', DATE_ADD(NOW(), INTERVAL -3 hour),'"+observacao+"')"
 	db.query(query, (error, results) => {
 		if(error){
 			response.send('Erro: ' + error)
@@ -268,7 +269,7 @@ app.post('/orcamento-add',[], function(request, response){
 
 app.get('/orcamento-print', (request, response) => {
 	//let id_orcamento = request.session.id
-	let query = "select DATE_FORMAT(o.data, '%d/%m/%Y') as data, i.qtd, i.unitario, i.total, m.nome as nome_produto, format(i.unitario, 2, 'de_DE') as unitario, format(i.total, 2, 'de_DE') as total, c.nome as nome_cliente, c.endereco, c.telefone from orcamento o inner join orcamento_item i on o.id_orcamento = i.id_orcamento inner join cliente c on o.id_cliente = c.id_cliente inner join material m on i.id_material = m.id_material where o.id_orcamento = 8" //'"+id_orcamento+"'"
+	let query = "select DATE_FORMAT(o.data, '%d/%m/%Y') as data, i.qtd, i.unitario, i.total, m.nome as nome_produto, format(i.unitario, 2, 'de_DE') as unitario, format(i.total, 2, 'de_DE') as total, c.nome as nome_cliente, c.endereco, c.telefone, o.orcamento from orcamento o inner join orcamento_item i on o.id_orcamento = i.id_orcamento inner join cliente c on o.id_cliente = c.id_cliente inner join material m on i.id_material = m.id_material where o.id_orcamento = 8" //'"+id_orcamento+"'"
 	db.query(query, (error, results) => {
 		if(error){
 			response.send('Erro: ' + error)
