@@ -12,7 +12,7 @@
         <div class="form-row">
           <div class="form-group">
             <label for="observacao">Observações</label>
-            <textarea class="form-control" id="observacao" name="observacao" rows="3"> OBS:
+            <textarea class="form-control" id="observacao" name="observacao" rows="6" cols="100"> OBS:
             TELHAS NÃO INCLUSAS NESTE ORÇAMENTO
             CONTRATO DE GARANTIA.
              ->FORMA DE PAGAMENTO<-
@@ -51,6 +51,6 @@
 <script> 
   function NewTab() { 
       window.open( 
-        "http://35.232.183.169:5000/orcamento-print", "_blank"); 
+        "http://35.232.183.169:5000/orcamento-print/"+<%=orcamento[i].nome%>, "_blank"); 
   } 
 </script> 
