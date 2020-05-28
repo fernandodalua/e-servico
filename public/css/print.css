@@ -26,7 +26,7 @@
 }
 .invoice-box table tr.top table td.title {
     font-size: 20px;
-    line-height: 20px;
+    /*line-height: 20px;*/
     color: #8b0000;
 }
 .invoice-box table tr.information table td {
