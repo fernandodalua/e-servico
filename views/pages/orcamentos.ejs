@@ -41,7 +41,7 @@
     <tr>        
       <th scope="row"><%=orcamento[i].nome%></th>
       <td><%=orcamento[i].data%></td>
-      <td><a href="http://35.232.183.169:5000/orcamento-print"+ <%=orcamento[i].id_orcamento%> ><i class="fas fa-print"></a></i></td><!-- onclick="NewTab()" -->
+      <td><a href="http://35.232.183.169:5000/orcamento-print/<%=orcamento[i].id_orcamento%>"><i class="fas fa-print"></a></i></td><!-- onclick="NewTab()" -->
     </tr>
     <% } %>
   </tbody>
